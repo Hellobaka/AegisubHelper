@@ -34,6 +34,7 @@
             this.processLoadStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.memoryStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.button1 = new System.Windows.Forms.Button();
+            this.translatedText = new System.Windows.Forms.RichTextBox();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,11 +87,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // translatedText
+            // 
+            this.translatedText.Location = new System.Drawing.Point(12, 70);
+            this.translatedText.Name = "translatedText";
+            this.translatedText.Size = new System.Drawing.Size(288, 258);
+            this.translatedText.TabIndex = 4;
+            this.translatedText.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.translatedText);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.playText);
@@ -113,5 +123,6 @@
         private System.Windows.Forms.ToolStripStatusLabel processLoadStatus;
         private System.Windows.Forms.ToolStripStatusLabel memoryStatus;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox translatedText;
     }
 }

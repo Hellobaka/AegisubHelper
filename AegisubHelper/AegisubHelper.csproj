@@ -27,6 +27,8 @@
     <PackageReference Include="Memory.dll.x86" Version="1.2.24" />
     <PackageReference Include="NAudio" Version="2.1.0" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+    <PackageReference Include="TencentCloudSDK.Asr" Version="3.0.523" />
+    <PackageReference Include="TencentCloudSDK.Tmt" Version="3.0.523" />
   </ItemGroup>
 
   <ItemGroup>

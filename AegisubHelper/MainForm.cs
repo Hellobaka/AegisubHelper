@@ -85,6 +85,9 @@ namespace AegisubHelper
             {
                 flag = false;
                 AudioHelper.StopRecord();
+                var text = AudioHelper.GetRawText();
+                translatedText.Text += text.Result + "\n";
+                translatedText.Text += AudioHelper.TranslateText(text.Result).TargetText + "\n";
             } 
             else
             {
