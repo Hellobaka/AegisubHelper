@@ -1,4 +1,5 @@
 ﻿using Memory;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -79,15 +80,19 @@ namespace AegisubHelper
             }).Start();
         }
         bool flag = false;
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             if(flag)
             {
                 flag = false;
                 AudioHelper.StopRecord();
-                var text = AudioHelper.GetRawText();
-                translatedText.Text += text.Result + "\n";
-                translatedText.Text += AudioHelper.TranslateText(text.Result).TargetText + "\n";
+                var text = await BaiduAPI.Translate(AudioHelper.outputFilePath);
+                JObject json = JObject.Parse(await text.Content.ReadAsStringAsync());
+                if (((int)json["code"]) == 0)
+                {
+                    translatedText.Text += json["data"]?["source"] + "\n";
+                    translatedText.Text += json["data"]?["target"] + "\n";
+                }
             } 
             else
             {
