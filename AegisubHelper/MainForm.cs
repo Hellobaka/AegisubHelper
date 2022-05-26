@@ -27,7 +27,7 @@ namespace AegisubHelper
             new Thread(() =>
             {
                 while (SearchProcessFlag)
-                {                    
+                {
                     Invoke(new MethodInvoker(() =>
                     {
                         if (AegisubProcess != null && AegisubProcess.HasExited == false)
@@ -82,22 +82,26 @@ namespace AegisubHelper
         bool flag = false;
         private async void button1_Click(object sender, EventArgs e)
         {
-            if(flag)
+            if (flag)
             {
                 flag = false;
                 AudioHelper.StopRecord();
-                var text = await BaiduAPI.Translate(AudioHelper.outputFilePath);
+                var text = await YouDaoAPI.Translate(AudioHelper.outputFilePath);
                 JObject json = JObject.Parse(await text.Content.ReadAsStringAsync());
-                if (((int)json["code"]) == 0)
+                if (((int)json["errorCode"]) == 0)
                 {
-                    translatedText.Text += json["data"]?["source"] + "\n";
-                    translatedText.Text += json["data"]?["target"] + "\n";
+                    translatedText.Text += json["query"] + "\n";
+                    translatedText.Text += json["translation"] + "\n";
                 }
-            } 
+                else
+                {
+                    translatedText.Text += json.ToString(Newtonsoft.Json.Formatting.Indented);
+                }
+            }
             else
             {
                 flag = true;
-                AudioHelper.StartRecord();                
+                AudioHelper.StartRecord();
             }
         }
     }
