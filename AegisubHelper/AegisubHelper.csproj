@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>AnyCPU;x86</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Build_x86\**" />
+    <EmbeddedResource Remove="Build_x86\**" />
+    <None Remove="Build_x86\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Build_x86.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Memory.dll.x86" Version="1.2.24" />
+    <PackageReference Include="NAudio" Version="2.1.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Memory">
+      <HintPath>Build_x86\Memory.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AegisubHelper", "AegisubHelper\AegisubHelper.csproj", "{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{157F4069-85CA-41B2-9B79-9CFD3660A92C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}.Debug|x86.ActiveCfg = Debug|x86
+		{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}.Debug|x86.Build.0 = Debug|x86
+		{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}.Release|x86.ActiveCfg = Release|x86
+		{037D42C3-EC59-4E4D-A2E8-E016F6AD7572}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3856F5CA-6FDB-4909-8878-2513A1065CB5}
+	EndGlobalSection
+EndGlobal
