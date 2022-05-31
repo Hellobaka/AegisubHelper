@@ -15,6 +15,9 @@ Aegisub辅助听译
 ## 使用到的网络接口
 - [有道翻译-短音频识别](https://ai.youdao.com/product-asr.s) (需个人认证，赠送50元，每次调用0.05元)
 - [百度翻译-通用翻译](https://fanyi-api.baidu.com/product/11) (需个人认证，每月200万字符免费)
+- [有道翻译-语音合成](https://ai.youdao.com/product-tts.s) (需个人认证，每次调用0.025元)
+
+不管是有道还是百度还是腾讯云，这个音频识别的质量都不好，想找个准度高一些的
 
 请自行通过审核并获取对应的`APPId`与`APPKey`，并在右上角的设置中填写
 
