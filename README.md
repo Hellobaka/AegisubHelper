@@ -7,6 +7,11 @@ Aegisub辅助听译
 
 内存读取用于获取播放状态，以此来自动录取音频片段并请求网络接口
 
+## 依赖
+[.net5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
+
+进入网站后，寻找`桌面运行时`，下载x86的即可
+
 ## 使用到的网络接口
 - [有道翻译-短音频识别](https://ai.youdao.com/product-asr.s) (需个人认证，赠送50元，每次调用0.05元)
 - [百度翻译-通用翻译](https://fanyi-api.baidu.com/product/11) (需个人认证，每月200万字符免费)
