@@ -22,7 +22,7 @@ namespace AegisubHelper
         public static T GetConfig<T>(string sectionName)
         {
             if (File.Exists(ConfigFileName) is false)
-                throw new FileNotFoundException();
+                File.WriteAllText(ConfigFileName, "{}");
             var o = JObject.Parse(File.ReadAllText(ConfigFileName));
             if (o.ContainsKey(sectionName))
                 return o[sectionName]!.ToObject<T>();
@@ -39,7 +39,7 @@ namespace AegisubHelper
         public static void WriteConfig<T>(string sectionName, T value)
         {
             if (File.Exists(ConfigFileName) is false)
-                throw new FileNotFoundException();
+                File.WriteAllText(ConfigFileName, "{}");
             var o = JObject.Parse(File.ReadAllText(ConfigFileName));
             if (o.ContainsKey(sectionName))
             {

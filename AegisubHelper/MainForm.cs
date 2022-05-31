@@ -64,6 +64,7 @@ namespace AegisubHelper
             RegisterHotKey(this.Handle, 100, KeyModifiers.Control, Keys.F9);
             Instance = this;
             Opacity = Config.GetConfig<int>("Opacity") / 100.0;
+            if (Opacity == 0) Opacity = 0.8;
             new Thread(async () =>
             {
                 while (SearchProcessFlag)
