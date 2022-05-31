@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.processTitle = new System.Windows.Forms.TextBox();
             this.playText = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -38,6 +39,8 @@
             this.HotKeyStatus = new System.Windows.Forms.Label();
             this.networkProgress = new System.Windows.Forms.ProgressBar();
             this.networkProcessLabel = new System.Windows.Forms.Label();
+            this.settingBtn = new System.Windows.Forms.Button();
+            this.buttonTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +59,7 @@
             this.playText.Name = "playText";
             this.playText.Size = new System.Drawing.Size(288, 23);
             this.playText.TabIndex = 1;
+            this.buttonTip.SetToolTip(this.playText, "Aegisub中的播放状态");
             // 
             // statusStrip1
             // 
@@ -64,7 +68,7 @@
             this.memoryStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 341);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(411, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(430, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -87,6 +91,7 @@
             this.RecordBtn.Size = new System.Drawing.Size(75, 23);
             this.RecordBtn.TabIndex = 3;
             this.RecordBtn.Text = "录制";
+            this.buttonTip.SetToolTip(this.RecordBtn, "切换音频录制状态");
             this.RecordBtn.UseVisualStyleBackColor = true;
             this.RecordBtn.Click += new System.EventHandler(this.Record_Click);
             // 
@@ -97,6 +102,7 @@
             this.translatedText.Size = new System.Drawing.Size(288, 258);
             this.translatedText.TabIndex = 4;
             this.translatedText.Text = "";
+            this.buttonTip.SetToolTip(this.translatedText, "听译结果与翻译结果");
             // 
             // HotKeyStatus
             // 
@@ -112,7 +118,7 @@
             this.networkProgress.Location = new System.Drawing.Point(306, 93);
             this.networkProgress.MarqueeAnimationSpeed = 30;
             this.networkProgress.Name = "networkProgress";
-            this.networkProgress.Size = new System.Drawing.Size(94, 23);
+            this.networkProgress.Size = new System.Drawing.Size(112, 23);
             this.networkProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.networkProgress.TabIndex = 6;
             this.networkProgress.Visible = false;
@@ -126,11 +132,23 @@
             this.networkProcessLabel.TabIndex = 7;
             this.networkProcessLabel.Text = "获取结果...";
             // 
+            // settingBtn
+            // 
+            this.settingBtn.Location = new System.Drawing.Point(387, 12);
+            this.settingBtn.Name = "settingBtn";
+            this.settingBtn.Size = new System.Drawing.Size(28, 23);
+            this.settingBtn.TabIndex = 8;
+            this.settingBtn.Text = "⚙️";
+            this.buttonTip.SetToolTip(this.settingBtn, "打开设置窗口");
+            this.settingBtn.UseVisualStyleBackColor = true;
+            this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(411, 363);
+            this.ClientSize = new System.Drawing.Size(430, 363);
+            this.Controls.Add(this.settingBtn);
             this.Controls.Add(this.networkProcessLabel);
             this.Controls.Add(this.networkProgress);
             this.Controls.Add(this.HotKeyStatus);
@@ -141,6 +159,7 @@
             this.Controls.Add(this.processTitle);
             this.Name = "MainForm";
             this.Opacity = 0.8D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AegisubHelper";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -164,5 +183,7 @@
         private System.Windows.Forms.Label HotKeyStatus;
         private System.Windows.Forms.ProgressBar networkProgress;
         private System.Windows.Forms.Label networkProcessLabel;
+        private System.Windows.Forms.Button settingBtn;
+        private System.Windows.Forms.ToolTip buttonTip;
     }
 }

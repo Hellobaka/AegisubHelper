@@ -62,7 +62,8 @@ namespace AegisubHelper
         {
             networkProcessLabel.Visible = false;
             RegisterHotKey(this.Handle, 100, KeyModifiers.Control, Keys.F9);
-
+            Instance = this;
+            Opacity = Config.GetConfig<int>("Opacity") / 100.0;
             new Thread(async () =>
             {
                 while (SearchProcessFlag)
@@ -171,6 +172,13 @@ namespace AegisubHelper
         {
             SearchProcessFlag = false;
             UnregisterHotKey(Handle, 100);
+        }
+        public static MainForm Instance;
+        private void settingBtn_Click(object sender, EventArgs e)
+        {
+            TopMost = false;
+            new Settings().ShowDialog();
+            TopMost = true;
         }
     }
 }
