@@ -36,5 +36,20 @@ namespace AegisubHelper
                 return (T)(object)new { };
             throw new Exception("无法默认返回");
         }
+        public static void WriteConfig<T>(string sectionName, T value)
+        {
+            if (File.Exists(ConfigFileName) is false)
+                throw new FileNotFoundException();
+            var o = JObject.Parse(File.ReadAllText(ConfigFileName));
+            if (o.ContainsKey(sectionName))
+            {
+                o[sectionName] = JToken.FromObject(value);
+            }
+            else
+            {
+                o.Add(sectionName, JToken.FromObject(value));
+            }
+            File.WriteAllText(ConfigFileName, o.ToString(Newtonsoft.Json.Formatting.Indented));
+        }
     }
 }
