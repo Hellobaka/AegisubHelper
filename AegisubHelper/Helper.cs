@@ -8,7 +8,7 @@ namespace AegisubHelper
     {
         public static string HMACSHA256(string message, string secret)
         {
-            secret = secret ?? "";
+            secret ??= "";
             var encoding = new ASCIIEncoding();
             byte[] keyByte = encoding.GetBytes(secret);
             byte[] messageBytes = encoding.GetBytes(message);
@@ -16,10 +16,15 @@ namespace AegisubHelper
             byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
             return Convert.ToBase64String(hashmessage);
         }
+        public static string SHA256(string message)
+        {
+            byte[] inputBytes = Encoding.UTF8.GetBytes(message);
+            byte[] hashedBytes = new SHA256CryptoServiceProvider().ComputeHash(inputBytes);
+            return BitConverter.ToString(hashedBytes).Replace("-", "");
+        }
         public static string MD5Encrypt(string message)
         {
-            var encoding = new ASCIIEncoding();
-            byte[] messageBytes = encoding.GetBytes(message);
+            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
             using var md5 = MD5.Create();
             byte[] hashmessage = md5.ComputeHash(messageBytes);
             return BitConverter.ToString(hashmessage).Replace("-", "").ToLower();
