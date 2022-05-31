@@ -1,7 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using NAudio.Wave;
+using Newtonsoft.Json.Linq;
 using PInvoke;
 using System;
 using System.Diagnostics;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -145,16 +147,15 @@ namespace AegisubHelper
                 string translate = "";
                 if (origin != "err")
                 {
-                    translate = await BaiduAPI.TextTranslate(origin);                    
+                    translate = await BaiduAPI.TextTranslate(origin);
                 }
                 BeginInvoke(new MethodInvoker(() =>
                 {
                     networkProgress.Visible = false;
                     networkProcessLabel.Visible = false;
-                    translatedText.Text += origin + "\n";
-                    translatedText.Text += translate + "\n\n";
-                    translatedText.Select(translatedText.Text.Length, 0);
-                    translatedText.ScrollToCaret();
+                    translatedText.Items.Add(origin);
+                    translatedText.Items.Add(translate);
+                    translatedText.Items.Add("");
                 }));
             }
             else
@@ -180,6 +181,82 @@ namespace AegisubHelper
             TopMost = false;
             new Settings().ShowDialog();
             TopMost = true;
+        }
+        private WaveOutEvent outputDevice;
+        private AudioFileReader audioFile;
+        bool audioLock = false;
+        private async void translatedText_DoubleClick(object sender, EventArgs e)
+        {
+            if (audioLock)
+            {
+                ShowStatusMsg("请等待音频播放完毕");
+                return;
+            }
+            networkProgress.Visible = true;
+            networkProcessLabel.Visible = true;
+
+            string text = translatedText.SelectedItem.ToString();
+            string result = "";
+            switch (translatedText.SelectedIndex % 3)
+            {
+                case 2:
+                    networkProgress.Visible = false;
+                    networkProcessLabel.Visible = false;
+                    return;
+                case 0:
+                    result = await YouDaoAPI.TTS(text, true);
+                    break;
+                case 1:
+                    result = await YouDaoAPI.TTS(text, false);
+                    break;
+                default:
+                    return;
+            }
+            networkProgress.Visible = false;
+            networkProcessLabel.Visible = false;
+
+            if (result != "err")
+            {
+                if (outputDevice == null)
+                {
+                    outputDevice = new WaveOutEvent();
+                    outputDevice.PlaybackStopped += (sender, args) =>
+                    {
+                        outputDevice.Dispose();
+                        outputDevice = null;
+                        audioFile.Dispose();
+                        audioFile = null;
+                        audioLock = false;
+                        GC.Collect();
+                    };
+                }
+                audioLock = true;
+                if (audioFile == null)
+                {
+                    audioFile = new AudioFileReader(result);
+                    outputDevice.Init(audioFile);
+                }
+                outputDevice.Play();
+            }
+        }
+
+        private void translatedText_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right && !string.IsNullOrWhiteSpace(translatedText.SelectedItem.ToString()))
+            {
+                Clipboard.SetText(translatedText.SelectedItem.ToString());
+                ShowStatusMsg("已复制文本");
+            }
+        }
+        public void ShowStatusMsg(string text, int timeout = 2000)
+        {
+            copyStatus.Text = text;
+            copyStatus.Visible = true;
+            new Thread(() =>
+            {
+                Thread.Sleep(timeout);
+                copyStatus.Visible = false;
+            }).Start();
         }
     }
 }

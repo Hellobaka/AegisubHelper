@@ -35,12 +35,13 @@
             this.processLoadStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.memoryStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.RecordBtn = new System.Windows.Forms.Button();
-            this.translatedText = new System.Windows.Forms.RichTextBox();
             this.HotKeyStatus = new System.Windows.Forms.Label();
             this.networkProgress = new System.Windows.Forms.ProgressBar();
             this.networkProcessLabel = new System.Windows.Forms.Label();
             this.settingBtn = new System.Windows.Forms.Button();
             this.buttonTip = new System.Windows.Forms.ToolTip(this.components);
+            this.translatedText = new System.Windows.Forms.ListBox();
+            this.copyStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +66,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.processLoadStatus,
-            this.memoryStatus});
+            this.memoryStatus,
+            this.copyStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 341);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(430, 22);
@@ -94,15 +96,6 @@
             this.buttonTip.SetToolTip(this.RecordBtn, "切换音频录制状态");
             this.RecordBtn.UseVisualStyleBackColor = true;
             this.RecordBtn.Click += new System.EventHandler(this.Record_Click);
-            // 
-            // translatedText
-            // 
-            this.translatedText.Location = new System.Drawing.Point(12, 70);
-            this.translatedText.Name = "translatedText";
-            this.translatedText.Size = new System.Drawing.Size(288, 258);
-            this.translatedText.TabIndex = 4;
-            this.translatedText.Text = "";
-            this.buttonTip.SetToolTip(this.translatedText, "听译结果与翻译结果");
             // 
             // HotKeyStatus
             // 
@@ -143,16 +136,34 @@
             this.settingBtn.UseVisualStyleBackColor = true;
             this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
             // 
+            // translatedText
+            // 
+            this.translatedText.FormattingEnabled = true;
+            this.translatedText.ItemHeight = 17;
+            this.translatedText.Location = new System.Drawing.Point(12, 73);
+            this.translatedText.Name = "translatedText";
+            this.translatedText.Size = new System.Drawing.Size(288, 259);
+            this.translatedText.TabIndex = 9;
+            this.translatedText.DoubleClick += new System.EventHandler(this.translatedText_DoubleClick);
+            this.translatedText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.translatedText_MouseUp);
+            // 
+            // copyStatus
+            // 
+            this.copyStatus.Name = "copyStatus";
+            this.copyStatus.Size = new System.Drawing.Size(68, 17);
+            this.copyStatus.Text = "已复制文本";
+            this.copyStatus.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 363);
+            this.Controls.Add(this.translatedText);
             this.Controls.Add(this.settingBtn);
             this.Controls.Add(this.networkProcessLabel);
             this.Controls.Add(this.networkProgress);
             this.Controls.Add(this.HotKeyStatus);
-            this.Controls.Add(this.translatedText);
             this.Controls.Add(this.RecordBtn);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.playText);
@@ -179,11 +190,12 @@
         private System.Windows.Forms.ToolStripStatusLabel processLoadStatus;
         private System.Windows.Forms.ToolStripStatusLabel memoryStatus;
         private System.Windows.Forms.Button RecordBtn;
-        private System.Windows.Forms.RichTextBox translatedText;
         private System.Windows.Forms.Label HotKeyStatus;
         private System.Windows.Forms.ProgressBar networkProgress;
         private System.Windows.Forms.Label networkProcessLabel;
         private System.Windows.Forms.Button settingBtn;
         private System.Windows.Forms.ToolTip buttonTip;
+        private System.Windows.Forms.ListBox translatedText;
+        private System.Windows.Forms.ToolStripStatusLabel copyStatus;
     }
 }
