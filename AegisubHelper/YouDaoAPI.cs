@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -91,6 +92,48 @@ namespace AegisubHelper
             if (((int)json["errorCode"]) == 0)
             {
                 return json["result"][0].ToString();
+            }
+            else
+            {
+                return "err";
+            }
+        }
+        public static async Task<string> TTS(string text, bool type)
+        {
+            string url = "https://openapi.youdao.com/ttsapi";
+            Dictionary<string, string> dic = new ();
+
+            string appKey = Config.GetConfig<string>("Youdao_AppId");
+            string appSecret = Config.GetConfig<string>("Youdao_Key");
+            string format = "mp3";
+            string voice = "0";
+            string speed = "1";
+            string volume = "1.00";
+            string salt = Guid.NewGuid().ToString();
+            string signStr = appKey + text + salt + appSecret;
+            string sign = Helper.MD5Encrypt(signStr).ToUpper();
+            
+            dic.Add("q", text);
+            dic.Add("langType", type?"ja": "zh-CHS");
+            dic.Add("appKey", appKey);
+            dic.Add("format", format);
+            dic.Add("voice", voice);
+            dic.Add("speed", speed);
+            dic.Add("volume", volume);
+            dic.Add("salt", salt);
+            dic.Add("sign", sign);
+            
+            using HttpClient client = new();
+            var formStr = string.Join('&', dic.Select(kv => $"{kv.Key}={HttpUtility.UrlEncode(kv.Value)}"));
+            var content = new StringContent(formStr, Encoding.UTF8);
+            content.Headers.ContentType.MediaType = "application/x-www-form-urlencoded";
+            var result = await client.PostAsync(url, content);
+            if (result.Content.Headers.ContentType.MediaType == "audio/mp3")
+            {
+                byte[] file = await result.Content.ReadAsByteArrayAsync();
+                Directory.CreateDirectory("tmp");
+                File.WriteAllBytes(Path.Combine("tmp", "audio.mp3"), file);
+                return Path.Combine("tmp", "audio.mp3");
             }
             else
             {
