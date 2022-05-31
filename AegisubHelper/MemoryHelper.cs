@@ -6,7 +6,7 @@ namespace AegisubHelper
 {
     public static class MemoryHelper
     {
-        public static string PlayPattern { get; set; } = "00 00 00 00 BC C1 A0 00 00 00 00 00 00 00 00 00 00 00 00 00";
+        public static string PlayPattern { get; set; } = "00 00 00 00 BC C1 ?? ?? 00 00 00 00 00 00 00 00 00 00 00 00";
         public static Mem Memory { get; set; }
         public static long PlayMemory { get; set; }
         public static bool Init(Process process)
@@ -16,7 +16,7 @@ namespace AegisubHelper
         }
         public static bool SearchPlayMemory()
         {
-            var ls = Memory.AoBScan(0x04000000, 0x05000000, PlayPattern, true, true);
+            var ls = Memory.AoBScan(PlayPattern, true, true);
             ls.Wait();
             if(ls.Result.Count() > 0)
             {
