@@ -29,4 +29,4 @@ Aegisub辅助听译
 - 在自动捕获模式下，程序会自动录取Aegisub播放的音频，并请求网络接口来获取听译结果与翻译
 
 ## 结果示例
-![image](https://user-images.githubusercontent.com/50934714/171083491-74ce7c1a-e830-442c-bc22-f49f0e8fbdab.png)
+![image](https://user-images.githubusercontent.com/50934714/171527112-40302e19-6fe6-4bf9-859e-7779439b3fdd.png)
