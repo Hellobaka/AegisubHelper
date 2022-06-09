@@ -34,6 +34,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.processLoadStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.memoryStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.copyStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.RecordBtn = new System.Windows.Forms.Button();
             this.HotKeyStatus = new System.Windows.Forms.Label();
             this.networkProgress = new System.Windows.Forms.ProgressBar();
@@ -41,7 +42,7 @@
             this.settingBtn = new System.Windows.Forms.Button();
             this.buttonTip = new System.Windows.Forms.ToolTip(this.components);
             this.translatedText = new System.Windows.Forms.ListBox();
-            this.copyStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.clearBtn = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,6 +86,13 @@
             this.memoryStatus.Name = "memoryStatus";
             this.memoryStatus.Size = new System.Drawing.Size(77, 17);
             this.memoryStatus.Text = "等待初始化...";
+            // 
+            // copyStatus
+            // 
+            this.copyStatus.Name = "copyStatus";
+            this.copyStatus.Size = new System.Drawing.Size(68, 17);
+            this.copyStatus.Text = "已复制文本";
+            this.copyStatus.Visible = false;
             // 
             // RecordBtn
             // 
@@ -139,26 +147,32 @@
             // translatedText
             // 
             this.translatedText.FormattingEnabled = true;
+            this.translatedText.HorizontalScrollbar = true;
             this.translatedText.ItemHeight = 17;
             this.translatedText.Location = new System.Drawing.Point(12, 73);
             this.translatedText.Name = "translatedText";
             this.translatedText.Size = new System.Drawing.Size(288, 259);
             this.translatedText.TabIndex = 9;
             this.translatedText.DoubleClick += new System.EventHandler(this.translatedText_DoubleClick);
+            this.translatedText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.translatedText_KeyUp);
             this.translatedText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.translatedText_MouseUp);
             // 
-            // copyStatus
+            // clearBtn
             // 
-            this.copyStatus.Name = "copyStatus";
-            this.copyStatus.Size = new System.Drawing.Size(68, 17);
-            this.copyStatus.Text = "已复制文本";
-            this.copyStatus.Visible = false;
+            this.clearBtn.Location = new System.Drawing.Point(306, 309);
+            this.clearBtn.Name = "clearBtn";
+            this.clearBtn.Size = new System.Drawing.Size(75, 23);
+            this.clearBtn.TabIndex = 10;
+            this.clearBtn.Text = "清空";
+            this.clearBtn.UseVisualStyleBackColor = true;
+            this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(430, 363);
+            this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.translatedText);
             this.Controls.Add(this.settingBtn);
             this.Controls.Add(this.networkProcessLabel);
@@ -197,5 +211,6 @@
         private System.Windows.Forms.ToolTip buttonTip;
         private System.Windows.Forms.ListBox translatedText;
         private System.Windows.Forms.ToolStripStatusLabel copyStatus;
+        private System.Windows.Forms.Button clearBtn;
     }
 }

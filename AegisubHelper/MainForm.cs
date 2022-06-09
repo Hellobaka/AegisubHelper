@@ -156,6 +156,7 @@ namespace AegisubHelper
                     translatedText.Items.Add(origin);
                     translatedText.Items.Add(translate);
                     translatedText.Items.Add("");
+                    translatedText.SelectedIndex = translatedText.Items.Count - 1;
                 }));
             }
             else
@@ -257,6 +258,39 @@ namespace AegisubHelper
                 Thread.Sleep(timeout);
                 copyStatus.Visible = false;
             }).Start();
+        }
+
+        private void translatedText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Debug.WriteLine(e.KeyChar);
+        }
+
+        private void translatedText_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (translatedText.Items.Count == 0) return;
+            if(e.KeyCode == Keys.Delete)
+            {
+                int index = translatedText.SelectedIndex;
+                switch (index % 3)
+                {
+                    case 0:                        
+                        break;
+                    case 1:
+                        index--;
+                        break;
+                    case 2:
+                        index -= 2;
+                        break;
+                }
+                translatedText.Items.RemoveAt(index);
+                translatedText.Items.RemoveAt(index);
+                translatedText.Items.RemoveAt(index);
+            }
+        }
+
+        private void clearBtn_Click(object sender, EventArgs e)
+        {
+            translatedText.Items.Clear();
         }
     }
 }
