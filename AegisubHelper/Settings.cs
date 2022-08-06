@@ -32,6 +32,21 @@ namespace AegisubHelper
             Baidu_AppKey.Text = Config.GetConfig<string>("Baidu_Key");
             Youdao_AppKey.Text = Config.GetConfig<string>("Youdao_AppId");
             Youdao_Secret.Text = Config.GetConfig<string>("Youdao_Key");
+            Aliyun_AppKey.Text = Config.GetConfig<string>("Aliyun_AppKey");
+            Aliyun_AccessID.Text = Config.GetConfig<string>("Aliyun_AccessKeyID");
+            Aliyun_AccessSecret.Text = Config.GetConfig<string>("Aliyun_AccessKeySecret");
+            string asrEngine = Config.GetConfig<string>("AsrEngine");
+            switch (asrEngine)
+            {
+                case "Youdao":
+                    Youdao_Engine.Checked = true;
+                    break; 
+                case "Aliyun":
+                    Aliyun_Engine.Checked = true;
+                    break;
+                default:
+                    break;
+            }
             int opacity = Config.GetConfig<int>("Opacity");
             if (opacity == 0)
             {
@@ -51,7 +66,18 @@ namespace AegisubHelper
             Config.WriteConfig("Baidu_Key", Baidu_AppKey.Text);
             Config.WriteConfig("Youdao_AppId", Youdao_AppKey.Text);
             Config.WriteConfig("Youdao_Key", Youdao_Secret.Text);
+            Config.WriteConfig("Aliyun_AppKey", Aliyun_AppKey.Text);
+            Config.WriteConfig("Aliyun_AccessKeyID", Aliyun_AccessID.Text);
+            Config.WriteConfig("Aliyun_AccessKeySecret", Aliyun_AccessSecret.Text);
             Config.WriteConfig("Opacity", OpactiySelector.Value);
+            if (Youdao_Engine.Checked)
+            {
+                Config.WriteConfig("AsrEngine", "Youdao");
+            }
+            else if (Aliyun_Engine.Checked)
+            {
+                Config.WriteConfig("AsrEngine", "Aliyun");
+            }
             Close();
         }
 
@@ -59,8 +85,8 @@ namespace AegisubHelper
         {
             Baidu_AppId.Text = "";
             Baidu_AppKey.Text = "";
-            Youdao_AppKey.Text = "";
-            Youdao_Secret.Text = "";
+            Aliyun_AppKey.Text = "";
+            Aliyun_AccessID.Text = "";
             OpactiySelector.Value = 80;
             opacityText.Text = $"主窗口透明度：{OpactiySelector.Value}%";
         }
