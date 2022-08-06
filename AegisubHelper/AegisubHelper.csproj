@@ -9,6 +9,7 @@
     <Platforms>AnyCPU;x86</Platforms>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <Version>1.1.0</Version>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,12 +27,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="aliyun-net-sdk-ecs" Version="4.24.18" />
     <PackageReference Include="Memory.dll.x86" Version="1.2.24" />
     <PackageReference Include="NAudio" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PInvoke.Kernel32" Version="0.7.104" />
     <PackageReference Include="PInvoke.User32" Version="0.7.104" />
     <PackageReference Include="PInvoke.Windows.Core" Version="0.7.104" />
+    <PackageReference Include="SIPSorcery.WebSocketSharp" Version="0.0.1" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
   </ItemGroup>
 

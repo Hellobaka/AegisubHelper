@@ -30,5 +30,6 @@ namespace AegisubHelper
             return BitConverter.ToString(hashmessage).Replace("-", "").ToLower();
         }
         public static long TimeStamp => (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+        public static long TimeStampms => (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
     }
 }
