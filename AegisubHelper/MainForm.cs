@@ -134,8 +134,32 @@ namespace AegisubHelper
                     Thread.Sleep(100);
                 }
             }).Start();
+            YoudaoAsr.OnSocketEnd += YoudaoAsr_OnSocketEnd;
         }
-        public async void CallRecordAndTranslate(bool r)
+
+        private async void YoudaoAsr_OnSocketEnd(string text)
+        {
+            string translate = "";
+            if (text != "err")
+            {
+                translate = await BaiduAPI.TextTranslate(text);
+            }
+            else
+            {
+                return;
+            }
+            BeginInvoke(new MethodInvoker(() =>
+            {
+                networkProgress.Visible = false;
+                networkProcessLabel.Visible = false;
+                translatedText.Items.Add(text);
+                translatedText.Items.Add(translate);
+                translatedText.Items.Add("");
+                translatedText.SelectedIndex = translatedText.Items.Count - 1;
+            }));
+        }
+
+            public async void CallRecordAndTranslate(bool r)
         {
             if (r)
             {
@@ -143,7 +167,19 @@ namespace AegisubHelper
                 RecordBtn.Text = "录制";
                 networkProgress.Visible = true;
                 networkProcessLabel.Visible = true;
-                var origin = await YouDaoAPI.Voice2Text(AudioHelper.outputFilePath);
+                // YoudaoAsr.Connect();
+                string origin = "";
+                switch (Config.GetConfig<string>("AsrEngine"))                    
+                {
+                    case "Youdao":
+                        origin = await YouDaoAPI.Voice2Text(AudioHelper.outputFilePath);
+                        break;
+                    case "Aliyun":
+                    default:
+                        origin = await AliyunAPI.Voice2Text(AudioHelper.outputFilePath);
+                        break;
+                }
+                //var origin = await YouDaoAPI.Voice2Text(AudioHelper.outputFilePath);                
                 string translate = "";
                 if (origin != "err")
                 {
