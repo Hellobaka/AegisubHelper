@@ -17,7 +17,7 @@ Aegisub辅助听译
 - [有道翻译-短音频识别](https://ai.youdao.com/product-asr.s) (需个人认证，赠送50元，每次调用0.05元)
 - [百度翻译-通用翻译](https://fanyi-api.baidu.com/product/11) (需个人认证，每月200万字符免费)
 - [有道翻译-语音合成](https://ai.youdao.com/product-tts.s) (需个人认证，每次调用0.025元)
-- [阿里云-一句话识别](https://help.aliyun.com/document_detail/84442.html)
+- [阿里云-一句话识别](https://help.aliyun.com/document_detail/84442.html)（目前免费）
 
 阿里云需要三个参数：`智能语音交互的APPKey` `访问控制-AccessID` `访问控制-AccessSecret`
 
@@ -29,6 +29,7 @@ Aegisub辅助听译
 - 假如下方提示`内存读取成功`，则可使用`自动捕获模式`
 - 按`Ctrl+F9`来切换自动捕获模式
 - 在自动捕获模式下，程序会自动录取Aegisub播放的音频，并请求网络接口来获取听译结果与翻译
+- 可双击识别或翻译结果进行朗读
 
 ## 结果示例
 ![image](https://user-images.githubusercontent.com/50934714/171527112-40302e19-6fe6-4bf9-859e-7779439b3fdd.png)
