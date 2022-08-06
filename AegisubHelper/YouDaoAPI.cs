@@ -13,6 +13,12 @@ namespace AegisubHelper
 {
     internal class YouDaoAPI
     {
+        /// <summary>
+        /// 语音翻译 准度辣鸡 翻译一般
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
         public static async Task<string> VoiceTranslate(string path)
         {
             string url = "https://openapi.youdao.com/speechtransapi";
@@ -52,6 +58,12 @@ namespace AegisubHelper
             var response = await client.PostAsync(url, content);
             return await response.Content.ReadAsStringAsync();
         }
+        /// <summary>
+        /// 语音转文本 准度辣鸡
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        /// <exception cref="FileNotFoundException"></exception>
         public static async Task<string> Voice2Text(string path)
         {
             string url = "https://openapi.youdao.com/asrapi";
@@ -98,6 +110,12 @@ namespace AegisubHelper
                 return "err";
             }
         }
+        /// <summary>
+        /// 文本转语音
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static async Task<string> TTS(string text, bool type)
         {
             string url = "https://openapi.youdao.com/ttsapi";
